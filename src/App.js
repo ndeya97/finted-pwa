@@ -1,11 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 import Routes from './config/router'
 
 function App() {
-  return <Routes></Routes>
+  return (
+    <Routes></Routes>
+  )
 }
 
 
