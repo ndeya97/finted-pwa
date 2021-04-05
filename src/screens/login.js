@@ -7,7 +7,6 @@ import Signin from '../components/signin'
 const Login = () => {
   return (
     <div>
-      <Header backgroundColor='green'></Header>
       <Signin></Signin>
     </div>
   )

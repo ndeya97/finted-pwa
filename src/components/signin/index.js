@@ -1,36 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react';
 import styled from 'styled-components'
-import axios from 'axios'
-import { getFriendlyURL } from 'workbox-core/_private';
+
 
 const submit = e => {
   e.preventDefault()
-  console.log(username)
-  console.log(password)
   // ENVOYER LE FORM 
-
-  axios({
-    method:'POST',
-    url:'https://easy-login-api.herokuapp.com/users/login',
-    data: {
-      username: username,
-      password: password
-    }
-  })
-  .then(res => {
-    console.log(res.headers['x-access-token'])
-    localStorage.setItem['token'], res.headers['x-access-token']
-  })
-  .catch(err => {
-    console.log(err)
-  })
 }
 
 const Signin = () => {
-  const [userName, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername ] = useState('')
+  const [password, setPassword]  = useState('')
+  
   return (
-    <StyledForm onSubmit={Submit}>
+    <StyledForm onSubmit={submit}>
       <StyledSpan>Signin</StyledSpan>
       <SigninInput placeholder="Username" type='text'></SigninInput>
       <SigninInput placeholder="password" type='password'></SigninInput>
