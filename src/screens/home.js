@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 
 
 
-const Home = () => {
+const Home = props  => {
   return (
     <div>
       <p>home</p>
+      <p>{props.match.params.id}</p>
       <Link to="/">To Login</Link>
     </div>
   )
