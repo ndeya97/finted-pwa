@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components'
+import axios from 'axios';
 
 
 
@@ -15,13 +16,25 @@ const Signin = () => {
   })
 
   const history = useHistory()
+
   const submit = e => {
     e.preventDefault()
     console.log(username)
     console.log(password)
   }
 
-  
+  axios({
+    method:'POST',
+    url:'https://easy-login-api.herokuapp.com/users/login',
+    data:{
+      username: username,
+      password: password
+    }
+  }).then(res => {
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
 
   return (
     <StyledForm onSubmit={submit}>
