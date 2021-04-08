@@ -1,21 +1,33 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components'
 
 
-const submit = e => {
-  e.preventDefault()
-  // ENVOYER LE FORM 
-}
+
 
 const Signin = () => {
-  const [username, setUsername ] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword]  = useState('')
+  const [formState, setFormState] = useState({username: '', password: ''})
+
+  useEffect(()=> {
+    console.log(formState)
+  })
+
+  const history = useHistory()
+  const submit = e => {
+    e.preventDefault()
+    console.log(username)
+    console.log(password)
+  }
+
   
+
   return (
     <StyledForm onSubmit={submit}>
       <StyledSpan>Signin</StyledSpan>
-      <SigninInput placeholder="Username" type='text'></SigninInput>
-      <SigninInput placeholder="password" type='password'></SigninInput>
+      <SigninInput placeholder="Username" type='text' onChange={e=> setFormState({...formState, username: e.target.value})}></SigninInput>
+      <SigninInput placeholder="password" type='password' onChange={e=> setPassword({...formState, password: e.target.value})}></SigninInput>
       <SigninInput type='submit'></SigninInput>
     </StyledForm>
   );
