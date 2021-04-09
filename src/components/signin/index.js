@@ -5,11 +5,9 @@ import axios from 'axios';
 
 
 
-
 const Signin = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword]  = useState('')
   const [formState, setFormState] = useState({username: '', password: ''})
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(()=> {
     console.log(formState)
@@ -19,28 +17,32 @@ const Signin = () => {
 
   const submit = e => {
     e.preventDefault()
-    console.log(username)
-    console.log(password)
+    if(!formState.username || !formState.password)
+      setErrorMessage('Les champs ne doivent pas être vide')
+  
+    axios({
+      method:'POST',
+      url:'https://easy-login-api.herokuapp.com/users/login',
+      data:{
+        username: formState.username,
+        password: formState.password
+      }
+    })
+    .then(res => {
+      localStorage.setItem('token', res.headers['x-access-token'])
+      history.push('/home/20')
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
-
-  axios({
-    method:'POST',
-    url:'https://easy-login-api.herokuapp.com/users/login',
-    data:{
-      username: username,
-      password: password
-    }
-  }).then(res => {
-    console.log(res)
-  }).catch(err => {
-    console.log(err)
-  })
 
   return (
     <StyledForm onSubmit={submit}>
       <StyledSpan>Signin</StyledSpan>
       <SigninInput placeholder="Username" type='text' onChange={e=> setFormState({...formState, username: e.target.value})}></SigninInput>
-      <SigninInput placeholder="password" type='password' onChange={e=> setPassword({...formState, password: e.target.value})}></SigninInput>
+      <SigninInput placeholder="password" type='password' onChange={e=> setFormState({...formState, password: e.target.value})}></SigninInput>
+      <StyledSpan>{errorMessage}</StyledSpan>
       <SigninInput type='submit'></SigninInput>
     </StyledForm>
   );
