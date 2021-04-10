@@ -21,7 +21,7 @@ const HeaderImage = styled.div`
   left: 0;
   right: 0;
   background-image: url(${bgImage});
-  background-position: bottom -1px right -1px;
+  background-position: top 200px right -1px;
   background-repeat: no-repeat;
   background-size: contain;
 `;
